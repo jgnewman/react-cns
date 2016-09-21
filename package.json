@@ -1,0 +1,81 @@
+{
+  "name": "react-cns",
+  "version": "0.0.1-alpha1",
+  "description": "Mystery stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "paths": {
+    "scss": "assets/scss/*.scss",
+    "js": "./app/**/*.cns",
+    "jsx": "./app/**/*.jsx",
+    "app": "./app/app.cns",
+    "html": "*.html"
+  },
+  "dest": {
+    "style": "style.css",
+    "app": "app.js",
+    "dist": "dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgnewman/react-cns.git"
+  },
+  "keywords": [
+    "react",
+    "cns",
+    "cream",
+    "and",
+    "sugar",
+    "cream",
+    "&",
+    "sugar"
+  ],
+  "author": "John Newman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jgnewman/react-cns/issues"
+  },
+  "homepage": "https://github.com/jgnewman/react-cns#readme",
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "browser-sync": "^2.16.0",
+    "browserify": "^13.1.0",
+    "colors": "^1.1.2",
+    "cream-and-sugar": "0.0.1-alpha7",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-cns": "0.0.1-alpha5",
+    "gulp-concat": "^2.6.0",
+    "gulp-copy": "0.0.2",
+    "gulp-jshint": "^2.0.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-mocha": "^3.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-run": "^1.7.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-server-livereload": "^1.8.4",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.9",
+    "jshint": "^2.9.3",
+    "mocha": "^3.0.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "run-sequence": "^1.2.2",
+    "through": "^2.3.8",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^1.13.2"
+  }
+}

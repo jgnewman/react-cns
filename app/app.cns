@@ -1,0 +1,10 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+App = React.createClass {
+  render: fn ->
+    <div>'app is working'</div>
+  end
+}
+
+ReactDOM.render(<App />, dom('#app-container'))
