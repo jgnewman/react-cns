@@ -1,4 +1,6 @@
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    clean = require('gulp-clean'),
     del = require('del'),
     run = require('gulp-run'),
     sass = require('gulp-sass'),
@@ -9,42 +11,27 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     jshint = require('gulp-jshint'),
-    browserSync = require('browser-sync'),
+    browserSync = require('browser-sync').create(),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
     sequence = require('run-sequence'),
     package = require('./package.json'),
+    creamify = require('creamify')
     reload = browserSync.reload;
-
-function cream() {
-  var buf = '';
-
-  function write(data) {
-    buf += data;
-  }
-
-  function end() {
-    this.queue(cns.compileCode(buf.toString(), null, { finalize: true }));
-    this.queue(null);
-  }
-
-  return function () {
-    return through(write, end);
-  };
-}
 
 /**
  * Cleaning dist/ folder
  */
 gulp.task('clean', function(cb) {
-  del(['dist/**'], cb);
+  return gulp.src('dist/**', { read: false })
+             .pipe(clean());
 })
 
 /**
  * Running livereload server
  */
 .task('server', function() {
-  browserSync({
+  browserSync.init({
     server: {
      baseDir: './'
     }
@@ -70,13 +57,15 @@ gulp.task('clean', function(cb) {
 
 /** JavaScript compilation */
 .task('js', function() {
-  return browserify({entries: package.paths.app, transform: [cream()]})
+  return browserify({entries: [package.paths.app], extensions: ['.cns']})
+  .transform(creamify)
   .bundle()
   .pipe(source(package.dest.app))
   .pipe(gulp.dest(package.dest.dist));
 })
 .task('js:min', function() {
-  return browserify({entries: package.paths.app, transform: [cream()]})
+  return browserify({entries: [package.paths.app], extensions: ['.cns']})
+  .transform(creamify)
   .bundle()
   .pipe(source(package.dest.app))
   .pipe(buffer())
@@ -84,21 +73,26 @@ gulp.task('clean', function(cb) {
   .pipe(gulp.dest(package.dest.dist));
 })
 
+.task('watch', function () {
+  return gulp.watch(
+    [package.paths.js, package.paths.jsx, package.paths.html, package.paths.scss],
+    function () { return sequence('sass', 'js', browserSync.reload) }
+  );
+})
+
+.task('watch:min', function () {
+  return gulp.watch(
+    [package.paths.js, package.paths.jsx, package.paths.html, package.paths.scss],
+    function () { return sequence('sass:min', 'js:min', browserSync.reload) }
+  );
+})
+
 /**
  * Compiling resources and serving application
  */
-.task('serve', ['clean', 'sass', 'js', 'server'], function() {
-
-  return gulp.watch([
-    package.paths.js, package.paths.jsx, package.paths.html, package.paths.scss
-  ], [
-   'sass', 'js', browserSync.reload
-  ]);
+.task('serve', function(done) {
+  return sequence('clean', 'sass', 'js', 'server', 'watch', done);
 })
-.task('serve:minified', ['clean', 'sass:min', 'js:min', 'server'], function() {
-  return gulp.watch([
-    package.paths.js, package.paths.jsx, package.paths.html, package.paths.scss
-  ], [
-   'sass:min', 'js:min', browserSync.reload
-  ]);
+.task('serve:min', function(done) {
+  return sequence('clean', 'sass:min', 'js:min', 'server', 'watch:min', done);
 });

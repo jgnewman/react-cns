@@ -1,0 +1,10 @@
+###
+Use scope piping to turn a module into a React class
+  import ClassName from './module' :: reactify
+###
+
+import React from 'react'
+
+reactify() -> React.createClass @
+
+export { reactify }

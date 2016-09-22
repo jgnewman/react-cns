@@ -1,0 +1,9 @@
+import React from 'react'
+
+getMessage() -> 'app is working'
+
+componentDidMount() -> console.log('mounted!')
+
+render() -> <div>getMessage()</div>
+
+export { componentDidMount, render }
