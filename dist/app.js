@@ -42,12 +42,18 @@ CNS_SYSTEM.dom = CNS_SYSTEM.dom || function (selector) {
     return document.querySelector(selector);
   };
 
+
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 var __ref0__ = require('./util/reactify');
 const reactify = __ref0__.reactify;
+
+
 const __ref1__ = require('./components/AppContainer');
 const AppContainer = CNS_SYSTEM.pipe(__ref1__).to(reactify)();
+
+
 ReactDOM.render(CNS_SYSTEM.createElement(AppContainer, {}, []), CNS_SYSTEM.dom('#app-container'));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -95,17 +101,25 @@ CNS_SYSTEM.aritize = CNS_SYSTEM.aritize || function (fun, arity) {
     };
   };
 
+
+
 const React = require('react');
+
+
 function getMessage () {
     const args = CNS_SYSTEM.args(arguments);
     
     return 'app is working';
   };
+
+
 function componentDidMount () {
     const args = CNS_SYSTEM.args(arguments);
     
     return console.log('mounted!');
   };
+
+
 function render () {
     const args = CNS_SYSTEM.args(arguments);
     
@@ -113,6 +127,8 @@ function render () {
 getMessage()
 ]);
   };
+
+
 CNS_SYSTEM.exp("componentDidMount", componentDidMount);
 CNS_SYSTEM.exp("render", render);
 
@@ -147,11 +163,15 @@ CNS_SYSTEM.aritize = CNS_SYSTEM.aritize || function (fun, arity) {
 
 
 const React = require('react');
+
+
 function reactify () {
     const args = CNS_SYSTEM.args(arguments);
     
     return React.createClass(this);
   };
+
+
 CNS_SYSTEM.exp("reactify", reactify);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})

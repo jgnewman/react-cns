@@ -1,9 +1,29 @@
+###
+AppContainer
+###
+
 import React from 'react'
 
+###
+This will be a private function since it is not exported.
+As such, it won't be added to the class spec but the exported
+functions will still have access to it.
+###
 getMessage() -> 'app is working'
 
+###
+When the component mounts, log a message to the console.
+###
 componentDidMount() -> console.log('mounted!')
 
+###
+For now, the render method does nothing but print out a simple
+string. We'll see how we can get fancier with this later.
+###
 render() -> <div>getMessage()</div>
 
+###
+Export only componentDidMount and render, thus allowing a class
+to be built with them.
+###
 export { componentDidMount, render }

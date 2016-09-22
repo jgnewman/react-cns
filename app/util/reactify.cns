@@ -1,10 +1,17 @@
 ###
 Use scope piping to turn a module into a React class
-  import ClassName from './module' :: reactify
+`import ClassName from './module' :: reactify`
 ###
 
 import React from 'react'
 
+###
+Assume the scope will be an object full of functions.
+Build a class using those functions.
+###
 reactify() -> React.createClass @
 
+###
+Export reactify.
+###
 export { reactify }
