@@ -1,0 +1,32 @@
+###
+This is where we pull everything in and render it into the DOM.
+###
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import AppContainer from './components/AppContainer'
+
+###
+Render our reactified container into the DOM using natively
+supported JSX syntax.
+###
+ReactDOM.render <AppContainer />, (dom '#app-container')
+
+# Create a process function
+process = spawn fn =>
+
+  factorial 0 => 1
+  factorial n => n * factorial n - 1
+
+  receive match
+    {{ FACTORIAL, num }} => reply {{ OK, factorial num }}
+    _                    => reply {{ ERR, 'Unknown message' }}
+
+# What to do when our process sends a message
+receive match
+  {{ OK, msg }}  => console.log 'Got back', msg
+  {{ ERR, msg }} => console.log 'Error', msg
+
+setInterval (fn =>
+  send process, {{ FACTORIAL, (Math.round (Math.random _) * 20) }}
+), 1000

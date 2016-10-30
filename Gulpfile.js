@@ -57,14 +57,14 @@ gulp.task('clean', function(cb) {
 
 /** JavaScript compilation */
 .task('js', function() {
-  return browserify({entries: [package.paths.app], extensions: ['.cns']})
+  return browserify({entries: [package.paths.app], extensions: ['.cns', '.cream']})
   .transform(creamify)
   .bundle()
   .pipe(source(package.dest.app))
   .pipe(gulp.dest(package.dest.dist));
 })
 .task('js:min', function() {
-  return browserify({entries: [package.paths.app], extensions: ['.cns']})
+  return browserify({entries: [package.paths.app], extensions: ['.cns', '.cream']})
   .transform(creamify)
   .bundle()
   .pipe(source(package.dest.app))

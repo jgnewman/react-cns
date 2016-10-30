@@ -1,0 +1,39 @@
+###
+Use scope piping to turn a module into a React class
+`import ClassName from './module' :: reactify`
+###
+
+import React from 'react'
+
+###
+Build a class using a list full of functions
+###
+handleList fnList => handleList fnList, {}
+handleList [], accum => React.createClass accum
+handleList [ hd | tl ], accum => handleList tl, (update hd.name, hd, accum)
+
+###
+Build a class using a tuple full of functions
+###
+handleTuple fnList =>
+  React.createClass tupleToObject fnList, fn each =>
+    each.name
+
+###
+Build a class using a tuple full of functions
+###
+handleObject fnList =>
+  React.createClass fnList
+
+###
+Assess the type of the function list and hand it off
+to the appropriate class builder.
+###
+reactify fnList where (type fnList) == 'array'  => handleList fnList
+reactify fnList where (type fnList) == 'tuple'  => handleTuple fnList
+reactify fnList where (type fnList) == 'object' => handleObject fnList
+
+###
+Export reactify.
+###
+export aritize reactify, 1

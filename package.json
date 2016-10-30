@@ -1,6 +1,6 @@
 {
   "name": "react-cns",
-  "version": "0.0.1-alpha1",
+  "version": "0.1.0",
   "description": "Mystery stuff",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,9 @@
   },
   "paths": {
     "scss": "assets/scss/*.scss",
-    "js": "./app/**/*.cns",
+    "js": "./app/**/*.cream",
     "jsx": "./app/**/*.jsx",
-    "app": "./app/app.cns",
+    "app": "./app/app.cream",
     "html": "*.html"
   },
   "dest": {
@@ -50,13 +50,12 @@
     "browser-sync": "^2.16.0",
     "browserify": "^13.1.0",
     "colors": "^1.1.2",
-    "cream-and-sugar": "0.0.3-alpha1",
-    "creamify": "0.0.1-alpha2",
+    "cream-and-sugar": "0.1.2",
+    "creamify": "0.1.3",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-clean": "^0.3.2",
-    "gulp-cns": "0.0.1-alpha5",
     "gulp-concat": "^2.6.0",
     "gulp-copy": "0.0.2",
     "gulp-jshint": "^2.0.1",
