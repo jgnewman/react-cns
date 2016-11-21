@@ -1,0 +1,109 @@
+###
+Creates the new todo item when the user hits enter.
+###
+handleMainKeyUp { keyCode, target } =>
+  { addTodo, updateIncoming } = @props
+  when
+    keyCode == 13
+      addTodo target.value
+      updateIncoming ''
+    keyCode != 13
+      null
+
+###
+Tracks the value of the new todo item being entered.
+###
+handleMainChange { target } =>
+  @props.updateIncoming target.value
+
+###
+Updates the filter to view all items
+###
+handleFilterAll _ =>
+  @props.updateFilter 'all'
+
+###
+Updates the filter to view active items
+###
+handleFilterActive _ =>
+  @props.updateFilter 'active'
+
+###
+Updates the filter to view complete items
+###
+handleFilterComplete _ =>
+  @props.updateFilter 'completed'
+
+###
+Clears all the completed todo items
+###
+handleClearComplete _ =>
+  { items, removeTodo } = @props
+  items.forEach fn item => if item.complete then removeTodo item.id
+
+###
+Toggle all items checked vs unchecked
+###
+handleToggleChange { target } =>
+  @props.markAll target.checked
+
+###
+Let users double click a todo to make it editable
+###
+handleDoubleClickItem _ =>
+  { startEditing, id } = @props
+  startEditing id
+  setTimeout fn ::=> @refs.edit.focus _
+
+###
+Updates the checked state of a given todo item
+###
+handleCheckItem _ =>
+  { toggleTodo, id } = @props
+  toggleTodo id
+
+###
+Remove a todo item from the list
+###
+handleRemoveItem _ =>
+  { removeTodo, id } = @props
+  removeTodo id
+
+###
+Triggers blur on an element if the user hits enter
+###
+handleKeyupItem { keyCode, target } =>
+  if keyCode == 13 then target.blur _
+
+###
+Stops editing on a todo item when the user
+blurs the input field.
+###
+handleBlurItem _ =>
+  { stopEditing, id } = @props
+  stopEditing id
+
+###
+Tracks the value of a given todo item as the
+user provides input
+###
+handleChangeItem { target } =>
+  { updateTodoValue, id } = @props
+  updateTodoValue { id: id, value: target.value }
+
+# Export handlers
+export {
+  handleMainKeyUp: handleMainKeyUp,
+  handleMainChange: handleMainChange,
+  handleFilterAll: handleFilterAll,
+  handleFilterActive: handleFilterActive,
+  handleFilterComplete: handleFilterComplete,
+  handleClearComplete: handleClearComplete,
+  handleToggleChange: handleToggleChange,
+  handleDoubleClickItem: handleDoubleClickItem,
+  handleCheckItem: handleCheckItem,
+  handleRemoveItem: handleRemoveItem,
+  handleKeyupItem: handleKeyupItem,
+  handleBlurItem: handleBlurItem,
+  handleChangeItem: handleChangeItem
+}

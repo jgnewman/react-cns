@@ -1,0 +1,65 @@
+addTodo value =>
+  {
+    type: ADD,
+    payload: value
+  }
+
+removeTodo id =>
+  {
+    type: REMOVE,
+    payload: id
+  }
+
+toggleTodo id =>
+  {
+    type: TOGGLE_TODO,
+    payload: id
+  }
+
+updateTodoValue payload =>
+  {
+    type: UPDATE_VALUE,
+    payload: payload
+  }
+
+updateFilter value =>
+  {
+    type: UPDATE_FILTER,
+    payload: value
+  }
+
+markAll bool =>
+  {
+    type: MARK_ALL,
+    payload: bool
+  }
+
+updateIncoming value =>
+  {
+    type: UPDATE_INCOMING,
+    payload: value
+  }
+
+startEditing id =>
+  {
+    type: START_EDITING,
+    payload: id
+  }
+
+stopEditing id =>
+  {
+    type: STOP_EDITING,
+    payload: id
+  }
+
+export {
+  addTodo: addTodo,
+  removeTodo: removeTodo,
+  toggleTodo: toggleTodo,
+  updateTodoValue: updateTodoValue,
+  updateFilter: updateFilter,
+  markAll: markAll,
+  updateIncoming: updateIncoming,
+  startEditing: startEditing,
+  stopEditing: stopEditing
+}

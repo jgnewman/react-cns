@@ -1,0 +1,16 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import reactify from './util/reactify'
+
+###
+@public render - Renders the markup for the class.
+###
+render _ =>
+  <footer className="info">
+    <p>'Double-click to edit a todo'</p>
+    <p>'Created by '<a href="http://todomvc.com">'John Newman'</a></p>
+    <p>'Part of '<a href="http://todomvc.com">'TodoMVC'</a></p>
+  </footer>
+
+# Export a React class.
+export reactify render, {}

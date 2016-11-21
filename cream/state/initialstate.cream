@@ -1,0 +1,36 @@
+import { retrieveState, uniqueId } from '../util/storage'
+
+###
+Default values for when somebody enters the app for the first time.
+###
+initialState = {
+  filter   : 'all',
+  incoming : '',
+  items    : [
+    {
+      complete : true,
+      value    : 'Taste JavaScript',
+      id       : (uniqueId _),
+      editing  : false
+    },
+    {
+      complete : false,
+      value    : 'Buy a unicorn',
+      id       : (uniqueId _),
+      editing  : false
+    }
+  ]
+}
+
+###
+Determines whether to use localStorage values
+our our default values for hydrating the initial
+redux state.
+###
+hydrateInitialState _ =>
+  storage = retrieveState _
+  if storage then storage else initialState
+
+
+# Export the initial state
+export hydrateInitialState _

@@ -1,0 +1,63 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import reactify from './util/reactify'
+
+propTypes = {
+  id: React.PropTypes.string.isRequired,
+  classList: React.PropTypes.string.isRequired,
+  isChecked: React.PropTypes.bool.isRequired,
+  labelText: React.PropTypes.string.isRequired,
+  toggleTodo: React.PropTypes.func.isRequired,
+  updateTodoValue: React.PropTypes.func.isRequired,
+  removeTodo: React.PropTypes.func.isRequired,
+  startEditing: React.PropTypes.func.isRequired,
+  stopEditing: React.PropTypes.func.isRequired,
+  handleDoubleClickItem: React.PropTypes.func.isRequired,
+  handleCheckItem: React.PropTypes.func.isRequired,
+  handleRemoveItem: React.PropTypes.func.isRequired,
+  handleKeyupItem: React.PropTypes.func.isRequired,
+  handleBlurItem: React.PropTypes.func.isRequired,
+  handleChangeItem: React.PropTypes.func.isRequired
+}
+
+###
+@public render - Define markup for the class.
+###
+render _ =>
+  {
+    classList, isChecked, labelText, handleDoubleClickItem, handleCheckItem,
+    handleRemoveItem, handleKeyupItem, handleBlurItem, handleChangeItem
+  } = @props
+
+  <li className={classList}>
+    <div className="view">
+
+      <input
+        className="toggle"
+        type="checkbox"
+        checked={isChecked}
+        onChange={::handleCheckItem}/>
+
+      <label
+        onDoubleClick={::handleDoubleClickItem}>
+        labelText
+      </label>
+
+      <button
+        className="destroy"
+        onClick={::handleRemoveItem}>
+      </button>
+    </div>
+
+    <input
+      ref="edit"
+      className="edit"
+      onBlur={::handleBlurItem}
+      onKeyUp={::handleKeyupItem}
+      onChange={::handleChangeItem}
+      value={labelText}
+    />
+  </li>
+
+# Export a React class.
+export reactify render, propTypes

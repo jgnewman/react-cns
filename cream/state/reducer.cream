@@ -1,0 +1,125 @@
+import initialState from './initialstate'
+import { uniqueId } from '../util/storage'
+
+###
+Locate an object in a list full of objects by the value
+of a property.
+###
+findIndex objList, prop, val => findIndex objList, prop, val, 0
+findIndex [], _, _, _ => -1
+findIndex [hd | tl], prop, val, counter =>
+  when
+    (get prop, hd) == val -> counter
+    true -> findIndex tl, prop, val, counter + 1
+
+###
+Add a new todo item to the list
+###
+addNewItem state, action =>
+  newitems = state.items.concat {
+    id: (uniqueId _),
+    complete: false,
+    value: action.payload,
+    editing: false
+  }
+  Object.assign {}, state, { items: newitems }
+
+###
+Remove a todo item from the list
+###
+removeItem state, action =>
+  toRemove = findIndex state.items, 'id', action.payload
+  newitems = remove toRemove, (state.items.slice _)
+  Object.assign {}, state, { items: newitems }
+
+###
+Update the complete value of a todo item
+###
+toggleItem state, action =>
+  toUpdateIndex = findIndex state.items, 'id', action.payload
+  toUpdate = get toUpdateIndex, state.items
+
+  updated =
+    when
+      toUpdate.complete  -> update 'complete', false, toUpdate
+      !toUpdate.complete -> update 'complete', true, toUpdate
+
+  newItems = update toUpdateIndex, updated, state.items.slice _
+
+  Object.assign {}, state, { items: newItems }
+
+###
+Update the visual filter
+###
+updateFilter state, action =>
+  Object.assign {}, state, { filter: action.payload }
+
+###
+Toggle all todo items between checked and unchecked
+###
+toggleItems state, action =>
+  Object.assign {}, state, { items: state.items.map fn item =>
+    when
+      action.payload == true  -> update 'complete', true, item
+      action.payload == false -> update 'complete', false, item
+  }
+
+###
+Update the value on the add item input
+###
+updateIncoming state, action =>
+  Object.assign {}, state, { incoming: action.payload }
+
+###
+Start editing one of the todos
+###
+startEditing state, action =>
+  toEditIndex = findIndex state.items, 'id', action.payload
+  toEdit = get toEditIndex, state.items
+  updated = update 'editing', true, toEdit
+
+  newItems = update toEditIndex, updated, state.items.slice _
+
+  Object.assign {}, state, { items: newItems }
+
+###
+Stop editing one of the todos
+###
+stopEditing state, action =>
+  toEditIndex = findIndex state.items, 'id', action.payload
+  toEdit = get toEditIndex, state.items
+  updated = update 'editing', false, toEdit
+
+  newItems = update toEditIndex, updated, state.items.slice _
+
+  Object.assign {}, state, { items: newItems }
+
+###
+Update the actual value of a todo item
+###
+updateTodoValue state, action =>
+  toEditIndex = findIndex state.items, 'id', action.payload.id
+  toEdit = get toEditIndex, state.items
+  updated = update 'value', action.payload.value, toEdit
+
+  newItems = update toEditIndex, updated, state.items.slice _
+
+  Object.assign {}, state, { items: newItems }
+
+# If we don't have state, recurse with the initial state
+# If we have state, begin reducing
+reducer state, action where !state => reducer initialState, action
+reducer state, action =>
+  caseof action.type
+    ADD             -> addNewItem state, action
+    REMOVE          -> removeItem state, action
+    TOGGLE_TODO     -> toggleItem state, action
+    UPDATE_VALUE    -> updateTodoValue state, action
+    UPDATE_FILTER   -> updateFilter state, action
+    MARK_ALL        -> toggleItems state, action
+    UPDATE_INCOMING -> updateIncoming state, action
+    START_EDITING   -> startEditing state, action
+    STOP_EDITING    -> stopEditing state, action
+    default         -> state
+
+export reducer

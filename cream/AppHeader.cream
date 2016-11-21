@@ -1,0 +1,30 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import reactify from './util/reactify'
+
+propTypes = {
+  handleMainKeyUp: React.PropTypes.func.isRequired,
+  incomingValue: React.PropTypes.string.isRequired,
+  handleMainChange: React.PropTypes.func.isRequired
+}
+
+###
+@public render - Renders the markup for the class.
+###
+render _ =>
+  { handleMainKeyUp, incomingValue, handleMainChange } = @props
+
+  <header className="header">
+    <h1>'todos'</h1>
+    <input
+      className="new-todo"
+      placeholder="What needs to be done?"
+      autoFocus={true}
+      onKeyUp={handleMainKeyUp}
+      onChange={handleMainChange}
+      value={incomingValue}
+    />
+  </header>
+
+# Export a React class.
+export reactify render, propTypes

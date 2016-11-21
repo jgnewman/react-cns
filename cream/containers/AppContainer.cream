@@ -1,0 +1,168 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import actions from '../state/actions'
+import reactify from '../util/reactify'
+import AppHeader from '../AppHeader'
+import TodoList from '../TodoList'
+import AppFooter from '../AppFooter'
+import InfoFooter from '../InfoFooter'
+
+import {
+
+  # Main input bar handlers
+  handleMainKeyUp, handleMainChange,
+
+  # Footer filter handlers
+  handleFilterAll, handleFilterActive, handleFilterComplete, handleClearComplete,
+
+  # Main toggle handlers
+  handleToggleChange,
+
+  # Todo item handlers
+  handleDoubleClickItem, handleCheckItem, handleRemoveItem, handleKeyupItem,
+  handleBlurItem, handleChangeItem
+
+} from '../handlers/handlers'
+
+###
+@private select - Used with `connect` to add state properties to the container
+                  as props.
+@param   {Object} state  The current redux state.
+@returns {Object}        Class properties mapped to the redux state.
+###
+select state =>
+  {
+    filter   : state.filter,
+    items    : state.items,
+    incoming : state.incoming
+  }
+
+###
+@private action - Used with `connect` to add actions to the container
+                  as props.
+@param   {Function} dispatch  A function for dispatching redux actions.
+@returns {Object}             Action dispatching functions mapped to class properties.
+###
+action dispatch =>
+  {
+    addTodo         : (bindActionCreators actions.addTodo, dispatch),
+    removeTodo      : (bindActionCreators actions.removeTodo, dispatch),
+    toggleTodo      : (bindActionCreators actions.toggleTodo, dispatch),
+    updateTodoValue : (bindActionCreators actions.updateTodoValue, dispatch),
+    updateFilter    : (bindActionCreators actions.updateFilter, dispatch),
+    markAll         : (bindActionCreators actions.markAll, dispatch),
+    updateIncoming  : (bindActionCreators actions.updateIncoming, dispatch),
+    startEditing    : (bindActionCreators actions.startEditing, dispatch),
+    stopEditing     : (bindActionCreators actions.stopEditing, dispatch)
+  }
+
+###
+@private clearCompleted - Clears all completed todos.
+@returns {undefined}
+###
+clearCompleted _ =>
+  { items, removeTodo } = @props
+  items.forEach fn item => if item.complete then removeTodo item.id
+
+###
+@private getActiveAmount - Counts the amount of active items we have.
+@param   {Array}  items    A list of todo items.
+@param   {Number} counter  Keeps track of the count as we recurse.
+@param   {Object} hd       A todo item.
+@param   {Object} tl       A list of todo items minus `hd`.
+@returns {Number}          The amount of active todo items in the list.
+###
+getActiveAmount items => getActiveAmount items, 0
+getActiveAmount [], counter => counter
+getActiveAmount [hd | tl], counter =>
+  when
+    # Items are not active if they are marked as complete
+    hd.complete  -> getActiveAmount tl, counter
+    !hd.complete -> getActiveAmount tl, counter + 1
+
+
+###
+@public render - A render function for the React class.
+@returns {ReactElement} Used to render the app.
+###
+render _ =>
+  {
+    filter, items, addTodo, toggleTodo, removeTodo, updateFilter,
+    markAll, updateIncoming, incoming, startEditing, stopEditing,
+    updateTodoValue
+  } = @props
+
+  # Count how many active items we have.
+  activeAmount = getActiveAmount items
+
+  # Render out a div
+  <div>
+    <section className="todoapp">
+
+      # Render the main header input
+      <AppHeader
+        handleMainKeyUp={::handleMainKeyUp}
+        handleMainChange={::handleMainChange}
+        incomingValue={incoming}
+      />
+
+      when
+        # When we have todos, render the todos list
+        items.length
+          <section className="main">
+
+            # Render the universal toggle
+            <input
+              className="toggle-all"
+              type="checkbox"
+              checked={!activeAmount}
+              onChange={::handleToggleChange}
+            />
+
+            # I don't know why todomvc has this but here it is
+            <label htmlFor="toggle-all">
+              'Mark all as complete'
+            </label>
+
+            # Render the actual todo list
+            <TodoList
+              filter={filter}
+              items={items}
+              toggleTodo={toggleTodo}
+              updateTodoValue={updateTodoValue}
+              removeTodo={removeTodo}
+              startEditing={startEditing}
+              stopEditing={stopEditing}
+              handleDoubleClickItem={handleDoubleClickItem}
+              handleCheckItem={handleCheckItem}
+              handleRemoveItem={handleRemoveItem}
+              handleKeyupItem={handleKeyupItem}
+              handleBlurItem={handleBlurItem}
+              handleChangeItem={handleChangeItem}
+            />
+
+            # Render the interactive footer
+            <AppFooter
+              filter={filter}
+              activeAmount={activeAmount}
+              handleClearComplete={::handleClearComplete}
+              handleFilterAll={::handleFilterAll}
+              handleFilterActive={::handleFilterActive}
+              handleFilterComplete={::handleFilterComplete}
+            />
+          </section>
+
+        # Don't render the todos list when we don't have todos
+        !items.length
+          null
+
+    </section>
+
+    # Render the informational footer
+    <InfoFooter />
+  </div>
+
+# Create and export a connected component
+export (connect select, action) (reactify render, {})

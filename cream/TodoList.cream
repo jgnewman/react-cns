@@ -1,0 +1,103 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import reactify from './util/reactify'
+import TodoListItem from './TodoListItem'
+
+# Define class proptypes
+propTypes = {
+  filter: React.PropTypes.string.isRequired,
+  items: React.PropTypes.array.isRequired,
+  toggleTodo: React.PropTypes.func.isRequired,
+  updateTodoValue: React.PropTypes.func.isRequired,
+  removeTodo: React.PropTypes.func.isRequired,
+  startEditing: React.PropTypes.func.isRequired,
+  stopEditing: React.PropTypes.func.isRequired,
+  handleDoubleClickItem: React.PropTypes.func.isRequired,
+  handleCheckItem: React.PropTypes.func.isRequired,
+  handleRemoveItem: React.PropTypes.func.isRequired,
+  handleKeyupItem: React.PropTypes.func.isRequired,
+  handleBlurItem: React.PropTypes.func.isRequired,
+  handleChangeItem: React.PropTypes.func.isRequired
+}
+
+###
+@private buildClasses - Build a class list for a todo item
+###
+buildClasses { complete, editing } =>
+  when
+    !complete and !editing -> ''
+    !complete and editing  -> 'editing'
+    complete  and !editing -> 'completed'
+    complete  and editing  -> 'completed editing'
+
+
+###
+@public buildItem - Build a todo item
+###
+buildItem item =>
+  {
+    removeTodo, toggleTodo, updateTodoValue, startEditing, stopEditing,
+    handleDoubleClickItem, handleCheckItem, handleRemoveItem,
+    handleKeyupItem, handleBlurItem, handleChangeItem
+  } = @props
+
+  <TodoListItem
+    key={item.id}
+    id={item.id}
+    classList={buildClasses item}
+    isChecked={if item.complete then true else false}
+    labelText={item.value}
+    toggleTodo={toggleTodo}
+    updateTodoValue={updateTodoValue}
+    removeTodo={removeTodo}
+    startEditing={startEditing}
+    stopEditing={stopEditing}
+    handleDoubleClickItem={handleDoubleClickItem}
+    handleCheckItem={handleCheckItem}
+    handleRemoveItem={handleRemoveItem}
+    handleKeyupItem={handleKeyupItem}
+    handleBlurItem={handleBlurItem}
+    handleChangeItem={handleChangeItem}
+  />
+
+###
+@public buildList - Build a list of todo items based on how
+                    the filter is currently set.
+###
+buildList filter, items => @buildList filter, items, []
+buildList filter, [], accum => accum
+buildList filter, [hd | tl], accum =>
+
+  when
+
+    # When the filter is 'all', build a Todo item
+    filter == 'all'
+      @buildList filter, tl, accum << (@buildItem hd)
+
+    # When the filter is 'active' and the item is not marked complete,
+    # build a Todo item
+    filter == 'active' and !hd.complete
+      @buildList filter, tl, accum << (@buildItem hd)
+
+    # When the filter is 'completed' and the item is marked complete,
+    # build a Todo item
+    filter == 'completed' and hd.complete
+      @buildList filter, tl, accum << (@buildItem hd)
+
+    # Otherwise, don't build a todo item.
+    true
+      @buildList filter, tl, accum
+
+###
+@public render - Define markup for the class.
+###
+render _ =>
+  { filter, items, removeTodo } = @props
+
+  <ul className="todo-list">
+    # List items should get the class `editing` when editing and `completed` when marked as completed
+    @buildList filter, items
+  </ul>
+
+# Export a React class
+export reactify {{ render, buildList, buildItem }}, propTypes
