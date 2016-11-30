@@ -39,7 +39,7 @@ Clears all the completed todo items
 ###
 handleClearComplete _ =>
   { items, removeTodo } = @props
-  items.forEach fn item => if item.complete then removeTodo item.id
+  items.forEach fn item => if item.complete do removeTodo item.id
 
 ###
 Toggle all items checked vs unchecked
@@ -73,7 +73,7 @@ handleRemoveItem _ =>
 Triggers blur on an element if the user hits enter
 ###
 handleKeyupItem { keyCode, target } =>
-  if keyCode == 13 then target.blur _
+  if keyCode == 13 do target.blur _
 
 ###
 Stops editing on a todo item when the user
@@ -93,17 +93,17 @@ handleChangeItem { target } =>
 
 # Export handlers
 export {
-  handleMainKeyUp: handleMainKeyUp,
-  handleMainChange: handleMainChange,
-  handleFilterAll: handleFilterAll,
-  handleFilterActive: handleFilterActive,
-  handleFilterComplete: handleFilterComplete,
-  handleClearComplete: handleClearComplete,
-  handleToggleChange: handleToggleChange,
-  handleDoubleClickItem: handleDoubleClickItem,
-  handleCheckItem: handleCheckItem,
-  handleRemoveItem: handleRemoveItem,
-  handleKeyupItem: handleKeyupItem,
-  handleBlurItem: handleBlurItem,
+  handleMainKeyUp: handleMainKeyUp
+  handleMainChange: handleMainChange
+  handleFilterAll: handleFilterAll
+  handleFilterActive: handleFilterActive
+  handleFilterComplete: handleFilterComplete
+  handleClearComplete: handleClearComplete
+  handleToggleChange: handleToggleChange
+  handleDoubleClickItem: handleDoubleClickItem
+  handleCheckItem: handleCheckItem
+  handleRemoveItem: handleRemoveItem
+  handleKeyupItem: handleKeyupItem
+  handleBlurItem: handleBlurItem
   handleChangeItem: handleChangeItem
 }

@@ -4,19 +4,19 @@ import { retrieveState, uniqueId } from '../util/storage'
 Default values for when somebody enters the app for the first time.
 ###
 initialState = {
-  filter   : 'all',
-  incoming : '',
+  filter   : 'all'
+  incoming : ''
   items    : [
     {
-      complete : true,
-      value    : 'Taste JavaScript',
-      id       : (uniqueId _),
+      complete : true
+      value    : 'Taste JavaScript'
+      id       : uniqueId _
       editing  : false
-    },
+    }
     {
-      complete : false,
-      value    : 'Buy a unicorn',
-      id       : (uniqueId _),
+      complete : false
+      value    : 'Buy a unicorn'
+      id       : uniqueId _
       editing  : false
     }
   ]
@@ -29,7 +29,7 @@ redux state.
 ###
 hydrateInitialState _ =>
   storage = retrieveState _
-  if storage then storage else initialState
+  if storage do storage else initialState
 
 
 # Export the initial state

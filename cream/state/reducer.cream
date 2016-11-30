@@ -17,9 +17,9 @@ Add a new todo item to the list
 ###
 addNewItem state, action =>
   newitems = state.items.concat {
-    id: (uniqueId _),
-    complete: false,
-    value: action.payload,
+    id: uniqueId _
+    complete: false
+    value: action.payload
     editing: false
   }
   Object.assign {}, state, { items: newitems }

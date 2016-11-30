@@ -9,8 +9,7 @@
     "react-redux": "^4.4.6"
   },
   "devDependencies": {
-    "cream-and-sugar": "^0.5.0",
-    "creamify": "^0.5.0",
+    "creamify": "^0.6.3",
     "browser-sync": "^2.16.0",
     "browserify": "^13.1.0",
     "del": "^2.2.2",

@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom'
 import reactify from './util/reactify'
 
 propTypes = {
-  id: React.PropTypes.string.isRequired,
-  classList: React.PropTypes.string.isRequired,
-  isChecked: React.PropTypes.bool.isRequired,
-  labelText: React.PropTypes.string.isRequired,
-  toggleTodo: React.PropTypes.func.isRequired,
-  updateTodoValue: React.PropTypes.func.isRequired,
-  removeTodo: React.PropTypes.func.isRequired,
-  startEditing: React.PropTypes.func.isRequired,
-  stopEditing: React.PropTypes.func.isRequired,
-  handleDoubleClickItem: React.PropTypes.func.isRequired,
-  handleCheckItem: React.PropTypes.func.isRequired,
-  handleRemoveItem: React.PropTypes.func.isRequired,
-  handleKeyupItem: React.PropTypes.func.isRequired,
-  handleBlurItem: React.PropTypes.func.isRequired,
+  id: React.PropTypes.string.isRequired
+  classList: React.PropTypes.string.isRequired
+  isChecked: React.PropTypes.bool.isRequired
+  labelText: React.PropTypes.string.isRequired
+  toggleTodo: React.PropTypes.func.isRequired
+  updateTodoValue: React.PropTypes.func.isRequired
+  removeTodo: React.PropTypes.func.isRequired
+  startEditing: React.PropTypes.func.isRequired
+  stopEditing: React.PropTypes.func.isRequired
+  handleDoubleClickItem: React.PropTypes.func.isRequired
+  handleCheckItem: React.PropTypes.func.isRequired
+  handleRemoveItem: React.PropTypes.func.isRequired
+  handleKeyupItem: React.PropTypes.func.isRequired
+  handleBlurItem: React.PropTypes.func.isRequired
   handleChangeItem: React.PropTypes.func.isRequired
 }
 
@@ -36,7 +36,8 @@ render _ =>
         className="toggle"
         type="checkbox"
         checked={isChecked}
-        onChange={::handleCheckItem}/>
+        onChange={::handleCheckItem}
+      />
 
       <label
         onDoubleClick={::handleDoubleClickItem}>

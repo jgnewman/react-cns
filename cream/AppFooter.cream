@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom'
 import reactify from './util/reactify'
 
 propTypes = {
-  filter: React.PropTypes.string.isRequired,
-  activeAmount: React.PropTypes.number.isRequired,
-  handleFilterAll: React.PropTypes.func.isRequired,
-  handleFilterActive: React.PropTypes.func.isRequired,
-  handleFilterComplete: React.PropTypes.func.isRequired,
+  filter: React.PropTypes.string.isRequired
+  activeAmount: React.PropTypes.number.isRequired
+  handleFilterAll: React.PropTypes.func.isRequired
+  handleFilterActive: React.PropTypes.func.isRequired
+  handleFilterComplete: React.PropTypes.func.isRequired
   handleClearComplete: React.PropTypes.func.isRequired
 }
 
@@ -20,7 +20,7 @@ render _ =>
     handleFilterActive, handleFilterComplete, handleClearComplete
   } = @props
 
-  pluralized = if activeAmount == 1 then 'item' else 'items'
+  pluralized = if activeAmount == 1 do 'item' else 'items'
 
   # This footer should hidden by default and shown when there are todos
   <footer className="footer">
@@ -30,7 +30,7 @@ render _ =>
     <ul className="filters">
       <li>
         <a
-          className={if filter == 'all' then 'selected' else ''}
+          className={if filter == 'all' do 'selected' else ''}
           href="#/"
           onClick={handleFilterAll}>
           'All'
@@ -38,7 +38,7 @@ render _ =>
       </li>
       <li>
         <a
-          className={if filter == 'active' then 'selected' else ''}
+          className={if filter == 'active' do 'selected' else ''}
           href="#/active"
           onClick={handleFilterActive}>
           'Active'
@@ -46,7 +46,7 @@ render _ =>
       </li>
       <li>
         <a
-          className={if filter == 'completed' then 'selected' else ''}
+          className={if filter == 'completed' do 'selected' else ''}
           href="#/completed"
           onClick={handleFilterComplete}>
           'Completed'
@@ -56,7 +56,8 @@ render _ =>
     # Hidden if no completed items are left ↓
     <button
       className="clear-completed"
-      onClick={handleClearComplete}>
+      onClick={handleClearComplete}
+    >
       'Clear completed'
     </button>
   </footer>

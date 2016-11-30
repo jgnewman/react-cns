@@ -5,18 +5,18 @@ import TodoListItem from './TodoListItem'
 
 # Define class proptypes
 propTypes = {
-  filter: React.PropTypes.string.isRequired,
-  items: React.PropTypes.array.isRequired,
-  toggleTodo: React.PropTypes.func.isRequired,
-  updateTodoValue: React.PropTypes.func.isRequired,
-  removeTodo: React.PropTypes.func.isRequired,
-  startEditing: React.PropTypes.func.isRequired,
-  stopEditing: React.PropTypes.func.isRequired,
-  handleDoubleClickItem: React.PropTypes.func.isRequired,
-  handleCheckItem: React.PropTypes.func.isRequired,
-  handleRemoveItem: React.PropTypes.func.isRequired,
-  handleKeyupItem: React.PropTypes.func.isRequired,
-  handleBlurItem: React.PropTypes.func.isRequired,
+  filter: React.PropTypes.string.isRequired
+  items: React.PropTypes.array.isRequired
+  toggleTodo: React.PropTypes.func.isRequired
+  updateTodoValue: React.PropTypes.func.isRequired
+  removeTodo: React.PropTypes.func.isRequired
+  startEditing: React.PropTypes.func.isRequired
+  stopEditing: React.PropTypes.func.isRequired
+  handleDoubleClickItem: React.PropTypes.func.isRequired
+  handleCheckItem: React.PropTypes.func.isRequired
+  handleRemoveItem: React.PropTypes.func.isRequired
+  handleKeyupItem: React.PropTypes.func.isRequired
+  handleBlurItem: React.PropTypes.func.isRequired
   handleChangeItem: React.PropTypes.func.isRequired
 }
 
@@ -36,8 +36,8 @@ buildClasses { complete, editing } =>
 ###
 buildItem item =>
   {
-    removeTodo, toggleTodo, updateTodoValue, startEditing, stopEditing,
-    handleDoubleClickItem, handleCheckItem, handleRemoveItem,
+    removeTodo, toggleTodo, updateTodoValue, startEditing, stopEditing
+    handleDoubleClickItem, handleCheckItem, handleRemoveItem
     handleKeyupItem, handleBlurItem, handleChangeItem
   } = @props
 
@@ -45,7 +45,7 @@ buildItem item =>
     key={item.id}
     id={item.id}
     classList={buildClasses item}
-    isChecked={if item.complete then true else false}
+    isChecked={if item.complete do true else false}
     labelText={item.value}
     toggleTodo={toggleTodo}
     updateTodoValue={updateTodoValue}

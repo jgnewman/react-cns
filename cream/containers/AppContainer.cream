@@ -12,16 +12,16 @@ import InfoFooter from '../InfoFooter'
 import {
 
   # Main input bar handlers
-  handleMainKeyUp, handleMainChange,
+  handleMainKeyUp, handleMainChange
 
   # Footer filter handlers
-  handleFilterAll, handleFilterActive, handleFilterComplete, handleClearComplete,
+  handleFilterAll, handleFilterActive, handleFilterComplete, handleClearComplete
 
   # Main toggle handlers
-  handleToggleChange,
+  handleToggleChange
 
   # Todo item handlers
-  handleDoubleClickItem, handleCheckItem, handleRemoveItem, handleKeyupItem,
+  handleDoubleClickItem, handleCheckItem, handleRemoveItem, handleKeyupItem
   handleBlurItem, handleChangeItem
 
 } from '../handlers/handlers'
@@ -34,8 +34,8 @@ import {
 ###
 select state =>
   {
-    filter   : state.filter,
-    items    : state.items,
+    filter   : state.filter
+    items    : state.items
     incoming : state.incoming
   }
 
@@ -47,14 +47,14 @@ select state =>
 ###
 action dispatch =>
   {
-    addTodo         : (bindActionCreators actions.addTodo, dispatch),
-    removeTodo      : (bindActionCreators actions.removeTodo, dispatch),
-    toggleTodo      : (bindActionCreators actions.toggleTodo, dispatch),
-    updateTodoValue : (bindActionCreators actions.updateTodoValue, dispatch),
-    updateFilter    : (bindActionCreators actions.updateFilter, dispatch),
-    markAll         : (bindActionCreators actions.markAll, dispatch),
-    updateIncoming  : (bindActionCreators actions.updateIncoming, dispatch),
-    startEditing    : (bindActionCreators actions.startEditing, dispatch),
+    addTodo         : (bindActionCreators actions.addTodo, dispatch)
+    removeTodo      : (bindActionCreators actions.removeTodo, dispatch)
+    toggleTodo      : (bindActionCreators actions.toggleTodo, dispatch)
+    updateTodoValue : (bindActionCreators actions.updateTodoValue, dispatch)
+    updateFilter    : (bindActionCreators actions.updateFilter, dispatch)
+    markAll         : (bindActionCreators actions.markAll, dispatch)
+    updateIncoming  : (bindActionCreators actions.updateIncoming, dispatch)
+    startEditing    : (bindActionCreators actions.startEditing, dispatch)
     stopEditing     : (bindActionCreators actions.stopEditing, dispatch)
   }
 
@@ -64,7 +64,7 @@ action dispatch =>
 ###
 clearCompleted _ =>
   { items, removeTodo } = @props
-  items.forEach fn item => if item.complete then removeTodo item.id
+  items.forEach fn item => if item.complete do removeTodo item.id
 
 ###
 @private getActiveAmount - Counts the amount of active items we have.

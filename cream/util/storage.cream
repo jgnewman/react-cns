@@ -5,7 +5,7 @@ saveState state =>
   try
     serialized = JSON.stringify state
     localStorage.setItem 'todomvc', serialized
-  catch err
+  default err
     undefined
 
 ###
@@ -15,7 +15,7 @@ retrieveState _ =>
   try
     serialized = localStorage.getItem 'todomvc'
     JSON.parse serialized
-  catch err
+  default err
     undefined
 
 ###
