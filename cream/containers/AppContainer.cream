@@ -58,13 +58,6 @@ action dispatch =>
     stopEditing     : (bindActionCreators actions.stopEditing, dispatch)
   }
 
-###
-@private clearCompleted - Clears all completed todos.
-@returns {undefined}
-###
-clearCompleted _ =>
-  { items, removeTodo } = @props
-  items.forEach fn item => if item.complete do removeTodo item.id
 
 ###
 @private getActiveAmount - Counts the amount of active items we have.

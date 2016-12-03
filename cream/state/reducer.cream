@@ -22,7 +22,7 @@ addNewItem state, action =>
     value: action.payload
     editing: false
   }
-  Object.assign {}, state, { items: newitems }
+  state <- { items: newitems }
 
 ###
 Remove a todo item from the list
@@ -30,7 +30,7 @@ Remove a todo item from the list
 removeItem state, action =>
   toRemove = findIndex state.items, 'id', action.payload
   newitems = remove toRemove, (state.items.slice _)
-  Object.assign {}, state, { items: newitems }
+  state <- { items: newitems }
 
 ###
 Update the complete value of a todo item
@@ -46,19 +46,19 @@ toggleItem state, action =>
 
   newItems = update toUpdateIndex, updated, state.items.slice _
 
-  Object.assign {}, state, { items: newItems }
+  state <- { items: newItems }
 
 ###
 Update the visual filter
 ###
 updateFilter state, action =>
-  Object.assign {}, state, { filter: action.payload }
+  state <- { filter: action.payload }
 
 ###
 Toggle all todo items between checked and unchecked
 ###
 toggleItems state, action =>
-  Object.assign {}, state, { items: state.items.map fn item =>
+  state <- { items: state.items.map fn item =>
     when
       action.payload == true  -> update 'complete', true, item
       action.payload == false -> update 'complete', false, item
@@ -68,7 +68,7 @@ toggleItems state, action =>
 Update the value on the add item input
 ###
 updateIncoming state, action =>
-  Object.assign {}, state, { incoming: action.payload }
+  state <- { incoming: action.payload }
 
 ###
 Start editing one of the todos
@@ -80,7 +80,7 @@ startEditing state, action =>
 
   newItems = update toEditIndex, updated, state.items.slice _
 
-  Object.assign {}, state, { items: newItems }
+  state <- { items: newItems }
 
 ###
 Stop editing one of the todos
@@ -92,7 +92,7 @@ stopEditing state, action =>
 
   newItems = update toEditIndex, updated, state.items.slice _
 
-  Object.assign {}, state, { items: newItems }
+  state <- { items: newItems }
 
 ###
 Update the actual value of a todo item
@@ -104,7 +104,7 @@ updateTodoValue state, action =>
 
   newItems = update toEditIndex, updated, state.items.slice _
 
-  Object.assign {}, state, { items: newItems }
+  state <- { items: newItems }
 
 # If we don't have state, recurse with the initial state
 # If we have state, begin reducing

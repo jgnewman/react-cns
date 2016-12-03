@@ -4,11 +4,11 @@ Creates the new todo item when the user hits enter.
 handleMainKeyUp { keyCode, target } =>
   { addTodo, updateIncoming } = @props
   when
+    keyCode != 13 -> null
     keyCode == 13
-      addTodo target.value
+      cleanInput = target.value.trim _
+      if cleanInput.length do addTodo target.value
       updateIncoming ''
-    keyCode != 13
-      null
 
 ###
 Tracks the value of the new todo item being entered.
@@ -39,7 +39,7 @@ Clears all the completed todo items
 ###
 handleClearComplete _ =>
   { items, removeTodo } = @props
-  items.forEach fn item => if item.complete do removeTodo item.id
+  for item in items do removeTodo item.id onlyif item.complete
 
 ###
 Toggle all items checked vs unchecked
