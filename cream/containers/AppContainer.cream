@@ -75,7 +75,6 @@ getActiveAmount [hd | tl], counter =>
     hd.complete  -> getActiveAmount tl, counter
     !hd.complete -> getActiveAmount tl, counter + 1
 
-
 ###
 @public render - A render function for the React class.
 @returns {ReactElement} Used to render the app.
@@ -139,6 +138,7 @@ render _ =>
             # Render the interactive footer
             <AppFooter
               filter={filter}
+              totalAmount={items.length}
               activeAmount={activeAmount}
               handleClearComplete={::handleClearComplete}
               handleFilterAll={::handleFilterAll}
@@ -158,4 +158,4 @@ render _ =>
   </div>
 
 # Create and export a connected component
-export (connect select, action) (reactify render, {})
+export (connect select, action) (reactify {render: render}, {})

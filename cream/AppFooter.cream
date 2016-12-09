@@ -4,6 +4,7 @@ import reactify from './util/reactify'
 
 propTypes = {
   filter: React.PropTypes.string.isRequired
+  totalAmount: React.PropTypes.number.isRequired
   activeAmount: React.PropTypes.number.isRequired
   handleFilterAll: React.PropTypes.func.isRequired
   handleFilterActive: React.PropTypes.func.isRequired
@@ -16,13 +17,13 @@ propTypes = {
 ###
 render _ =>
   {
-    filter, activeAmount, handleFilterAll,
+    filter, totalAmount, activeAmount, handleFilterAll,
     handleFilterActive, handleFilterComplete, handleClearComplete
   } = @props
 
+  completedAmount = totalAmount - activeAmount
   pluralized = if activeAmount == 1 do 'item' else 'items'
 
-  # This footer should hidden by default and shown when there are todos
   <footer className="footer">
     # This should be `0 items left` by default
     <span className="todo-count"><strong>activeAmount</strong>` ${pluralized} left`</span>
@@ -31,7 +32,6 @@ render _ =>
       <li>
         <a
           className={if filter == 'all' do 'selected' else ''}
-          href="#/"
           onClick={handleFilterAll}>
           'All'
         </a>
@@ -39,7 +39,6 @@ render _ =>
       <li>
         <a
           className={if filter == 'active' do 'selected' else ''}
-          href="#/active"
           onClick={handleFilterActive}>
           'Active'
         </a>
@@ -47,19 +46,23 @@ render _ =>
       <li>
         <a
           className={if filter == 'completed' do 'selected' else ''}
-          href="#/completed"
           onClick={handleFilterComplete}>
           'Completed'
         </a>
       </li>
     </ul>
+
     # Hidden if no completed items are left ↓
-    <button
-      className="clear-completed"
-      onClick={handleClearComplete}
-    >
-      'Clear completed'
-    </button>
+    when
+      completedAmount
+        <button
+          className="clear-completed"
+          onClick={handleClearComplete}>
+          'Clear completed'
+        </button>
+
+      !completedAmount -> null
+
   </footer>
 
 # Export a React class.
