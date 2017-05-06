@@ -47,15 +47,15 @@ select state =>
 ###
 action dispatch =>
   {
-    addTodo         : (bindActionCreators actions.addTodo, dispatch)
-    removeTodo      : (bindActionCreators actions.removeTodo, dispatch)
-    toggleTodo      : (bindActionCreators actions.toggleTodo, dispatch)
-    updateTodoValue : (bindActionCreators actions.updateTodoValue, dispatch)
-    updateFilter    : (bindActionCreators actions.updateFilter, dispatch)
-    markAll         : (bindActionCreators actions.markAll, dispatch)
-    updateIncoming  : (bindActionCreators actions.updateIncoming, dispatch)
-    startEditing    : (bindActionCreators actions.startEditing, dispatch)
-    stopEditing     : (bindActionCreators actions.stopEditing, dispatch)
+    addTodo         : bindActionCreators actions.addTodo, dispatch
+    removeTodo      : bindActionCreators actions.removeTodo, dispatch
+    toggleTodo      : bindActionCreators actions.toggleTodo, dispatch
+    updateTodoValue : bindActionCreators actions.updateTodoValue, dispatch
+    updateFilter    : bindActionCreators actions.updateFilter, dispatch
+    markAll         : bindActionCreators actions.markAll, dispatch
+    updateIncoming  : bindActionCreators actions.updateIncoming, dispatch
+    startEditing    : bindActionCreators actions.startEditing, dispatch
+    stopEditing     : bindActionCreators actions.stopEditing, dispatch
   }
 
 

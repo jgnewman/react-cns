@@ -46,7 +46,7 @@ reactify fnList, propTypes =>
     'tuple'    -> buildClass (handleTuple fnList), propTypes
     'object'   -> buildClass (handleObject fnList), propTypes
     'function' -> buildClass (handleFun fnList), propTypes
-    default    -> throw create Error, 'Could not create a react class.'
+    default    -> die 'Could not create a react class.'
 
 ###
 Export reactify.
