@@ -1,15 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import reactify from './util/reactify'
 
 propTypes = {
-  filter: React.PropTypes.string.isRequired
-  totalAmount: React.PropTypes.number.isRequired
-  activeAmount: React.PropTypes.number.isRequired
-  handleFilterAll: React.PropTypes.func.isRequired
-  handleFilterActive: React.PropTypes.func.isRequired
-  handleFilterComplete: React.PropTypes.func.isRequired
-  handleClearComplete: React.PropTypes.func.isRequired
+  filter: PropTypes.string.isRequired
+  totalAmount: PropTypes.number.isRequired
+  activeAmount: PropTypes.number.isRequired
+  handleFilterAll: PropTypes.func.isRequired
+  handleFilterActive: PropTypes.func.isRequired
+  handleFilterComplete: PropTypes.func.isRequired
+  handleClearComplete: PropTypes.func.isRequired
 }
 
 ###

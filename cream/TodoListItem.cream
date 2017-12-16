@@ -1,23 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import reactify from './util/reactify'
 
 propTypes = {
-  id: React.PropTypes.string.isRequired
-  classList: React.PropTypes.string.isRequired
-  isChecked: React.PropTypes.bool.isRequired
-  labelText: React.PropTypes.string.isRequired
-  toggleTodo: React.PropTypes.func.isRequired
-  updateTodoValue: React.PropTypes.func.isRequired
-  removeTodo: React.PropTypes.func.isRequired
-  startEditing: React.PropTypes.func.isRequired
-  stopEditing: React.PropTypes.func.isRequired
-  handleDoubleClickItem: React.PropTypes.func.isRequired
-  handleCheckItem: React.PropTypes.func.isRequired
-  handleRemoveItem: React.PropTypes.func.isRequired
-  handleKeyupItem: React.PropTypes.func.isRequired
-  handleBlurItem: React.PropTypes.func.isRequired
-  handleChangeItem: React.PropTypes.func.isRequired
+  id: PropTypes.string.isRequired
+  classList: PropTypes.string.isRequired
+  isChecked: PropTypes.bool.isRequired
+  labelText: PropTypes.string.isRequired
+  toggleTodo: PropTypes.func.isRequired
+  updateTodoValue: PropTypes.func.isRequired
+  removeTodo: PropTypes.func.isRequired
+  startEditing: PropTypes.func.isRequired
+  stopEditing: PropTypes.func.isRequired
+  handleDoubleClickItem: PropTypes.func.isRequired
+  handleCheckItem: PropTypes.func.isRequired
+  handleRemoveItem: PropTypes.func.isRequired
+  handleKeyupItem: PropTypes.func.isRequired
+  handleBlurItem: PropTypes.func.isRequired
+  handleChangeItem: PropTypes.func.isRequired
 }
 
 ###

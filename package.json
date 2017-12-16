@@ -1,17 +1,19 @@
 {
   "private": true,
   "dependencies": {
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0",
-    "redux": "^3.6.0",
+    "create-react-class": "^15.6.2",
+    "prop-types": "^15.6.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-redux": "^4.4.6"
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0",
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.0"
   },
   "devDependencies": {
-    "creamify": "^0.7.1",
     "browser-sync": "^2.16.0",
     "browserify": "^13.1.0",
+    "creamify": "^0.7.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
